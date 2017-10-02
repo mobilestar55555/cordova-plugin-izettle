@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='utf-8'?>
+<plugin id="cordova-plugin-izettle"
+        version="1.0.4"
+        xmlns="http://apache.org/cordova/ns/plugins/1.0"
+        xmlns:android="http://schemas.android.com/apk/res/android">
+
+   <engines>
+      <engine name="cordova" version=">=3.9.1" /><!-- Needs cordova/urlutil -->
+    </engines>
+
+  <name>izettle</name>
+  <description>izettle Plugin</description>
+  <js-module name="izettle" src="www/izettle.js">
+    <clobbers target="izettle" />
+  </js-module>
+  <platform name="ios">
+    <config-file parent="UISupportedExternalAccessoryProtocols" target="*-Info.plist">
+        <array>
+          <string>com.izettle.cardreader-one</string>
+          <string>com.miura.shuttle.izettle</string>
+        </array>
+    </config-file>
+    <config-file parent="NSLocationWhenInUseUsageDescription" target="*-Info.plist">
+        <string></string>
+    </config-file>
+    <hook type="after_platform_add" src="hook/hook.js" />
+
+    <header-file src="src/ios/iZettle.h" />
+    <source-file src="src/ios/iZettle.m" />
+
+    <framework src="src/ios/Frameworks/iZettlePayments.framework" custom="true" compiler-flags="-ObjC" embed="true" />
+    <framework src="src/ios/Frameworks/iZettleSDK.framework" custom="true" compiler-flags="-ObjC" embed="true" />
+    <framework src="src/ios/Frameworks/iZettleShared.framework" custom="true" compiler-flags="-ObjC" embed="true" />
+    <framework src="Accelerate.framework" />
+    <framework src="AudioToolbox.framework" />
+    <framework src="AVFoundation.framework" />
+    <framework src="CoreData.framework" />
+    <framework src="CoreLocation.framework" />
+    <framework src="ExternalAccessory.framework" />
+    <framework src="libc++.tdb" />
+    <framework src="libz.tdb" />
+    <framework src="MediaPlayer.framework" />
+    <framework src="MessageUI.framework" />
+    <framework src="SystemConfiguration.framework" />
+    <framework src="QuartzCore.framework" />
+
+    <config-file parent="/*" target="config.xml">
+      <feature name="izettle">
+        <param name="onload" value="true" />
+        <param name="ios-package" value="iZettle" />
+    </feature>
+    </config-file>
+
+  </platform>
+</plugin>
